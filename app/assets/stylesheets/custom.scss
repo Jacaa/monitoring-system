@@ -1,0 +1,106 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import url('https://fonts.googleapis.com/css?family=Arvo');
+
+/* colors */
+
+$fake-camera-color: #ADAFAD;
+$dark-grey:         #3E3E3E;
+$white:             #F5F5F5;
+$light-grey:        #CFCDCD;
+$google-color:      #DD4B39;
+
+/* fonts */
+
+$brand-font: 'Arvo', sans-serif;
+
+body {
+  min-height: 100vh;
+  background-color: $white;
+}
+
+#camera-view {
+  height: 320px;
+  width: 480px;
+  background-color: $fake-camera-color;
+  margin: auto;
+  margin-top: 50px;
+}
+
+/* navbar */
+
+nav {
+  margin: auto;
+  width: 80%;
+  &.navbar {
+    border-radius: 0;
+    border-bottom: 1px solid $light-grey;
+    background-color: $white;
+    .navbar-brand {
+      font-family: $brand-font;
+      font-size: 1.7em;
+      color: $dark-grey;
+      &:hover {
+        color: $light-grey;
+      }
+    }
+  }
+}
+
+/* login-with-google-icon */
+
+.oauth-icons {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  padding-bottom: 40px;
+  margin-top: 5px;
+  margin-right: 10px;
+  border-radius: 5%;
+  &:hover .overlay {
+    bottom: 0;
+    height: 100%;
+  }
+  .overlay {
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    right: 0;
+    background-color: inherit;
+    overflow: hidden;
+    width: 100%;
+    height:0;
+    transition: .2s ease;
+    border-radius: 5%;
+  }
+  .text {
+    white-space: nowrap; 
+    font-size: 0.85em;
+    position: absolute;
+    overflow: hidden;
+    font-family: $brand-font;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    a {
+      text-decoration: none;
+      color: $white;
+      font-weight: bold;
+    }
+  }
+  .fa {
+    color: $white;
+    font-size: 2em;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.google {
+  background-color: $google-color;
+}
