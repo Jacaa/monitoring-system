@@ -17,7 +17,7 @@ omniauth_hash = { 'provider' => 'google_oauth2',
                       'nickname' => 'nickname'
                   }
 }
-OmniAuth.config.add_mock(:google, omniauth_hash)
+OmniAuth.config.add_mock(:google_oauth2, omniauth_hash)
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
 # run as spec files by default. This means that files in spec/support that end

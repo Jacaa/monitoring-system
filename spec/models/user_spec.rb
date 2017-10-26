@@ -4,7 +4,7 @@ RSpec.describe User, type: :model do
   
   it "creates itself from an omniauth hash" do
     omniauth_hash = { :provider => 'google_oauth2',
-                      :uid => '12345',
+                      :uid => '54321',
                       :info => {
                           :name => 'name',
                           :email => 'example@email.com',
@@ -12,9 +12,9 @@ RSpec.describe User, type: :model do
                       }
                     }
     User.create_user(omniauth_hash)
-    user = User.first
+    user = User.last
     expect(user.provider).to eq('google_oauth2')
-    expect(user.uid).to eq('12345')
+    expect(user.uid).to eq('54321')
     expect(user.email).to eq('example@email.com')
   end
 

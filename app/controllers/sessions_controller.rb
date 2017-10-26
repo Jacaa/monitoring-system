@@ -3,7 +3,6 @@ class SessionsController < ApplicationController
   # Using OmniAuth
   def create
     auth = request.env['omniauth.auth']
-    auth_without_extra = auth.except('extra')
     user = User.sign_in_from_omniauth(auth)
     if user
       log_in user
