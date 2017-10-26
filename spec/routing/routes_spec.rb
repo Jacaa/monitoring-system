@@ -7,4 +7,14 @@ RSpec.describe "Routes" do
       expect(get("/")).to route_to("home#index")
     end
   end
+
+  describe "for Sessions controller" do
+    it "GET '/auth/google_oauth2/callback' to the create action" do
+      expect(get("/auth/google_oauth2/callback")).to route_to("sessions#create")
+    end
+
+    it "DELETE '/logout' to the destroy action" do
+      expect(delete("/logout")).to route_to("sessions#destroy")
+    end
+  end
 end

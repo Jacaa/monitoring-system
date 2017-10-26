@@ -6,8 +6,18 @@ require File.expand_path('../../config/environment', __FILE__)
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'rspec/rails'
 require 'capybara/rspec'
+require 'support/factory_bot'
 # Add additional requires below this line. Rails is not loaded until this point!
-
+OmniAuth.config.test_mode = true
+omniauth_hash = { 'provider' => 'google_oauth2',
+                  'uid' => '12345',
+                  'info' => {
+                      'name' => 'name',
+                      'email' => 'example@email.com',
+                      'nickname' => 'nickname'
+                  }
+}
+OmniAuth.config.add_mock(:google, omniauth_hash)
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
 # run as spec files by default. This means that files in spec/support that end

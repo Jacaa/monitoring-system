@@ -1,4 +1,11 @@
-= render 'layouts/navbar'
-.container
-  .row
-    #camera-view
+- if logged_in?
+  = render 'layouts/navbar_logged'
+  .container
+    .row
+      #camera-view
+- else
+  = render 'layouts/navbar'
+  = render 'layouts/flash'
+  .container
+    .row
+      #camera-view
