@@ -1,9 +1,9 @@
-%nav.navbar.navbar-static
+%nav.navbar.navbar-static.mobile
   .container-fluid
     .navbar-header
       = link_to 'Monitoring system', root_path, class: "navbar-brand"
     %ul.nav.navbar-nav.navbar-right
       %li
-        Logged as: 
-        = current_user.email
-        %a= link_to "Logout", '/logout', method: :delete
+        = link_to current_user.email, '/'
+      %li
+        = link_to "Logout", '/logout', method: :delete

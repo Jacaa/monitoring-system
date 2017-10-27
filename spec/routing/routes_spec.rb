@@ -6,6 +6,10 @@ RSpec.describe "Routes" do
     it "GET '/' routes to the index action" do
       expect(get("/")).to route_to("home#index")
     end
+
+    it "GET '/cookies' routes to the cookies_eu action" do
+      expect(get("/cookies")).to route_to("home#cookies_eu")
+    end
   end
 
   describe "for Sessions controller" do

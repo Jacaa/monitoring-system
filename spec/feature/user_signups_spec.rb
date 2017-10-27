@@ -1,9 +1,9 @@
 require "rails_helper"
 
-RSpec.feature "user" do
+RSpec.feature "User" do
   
-  describe "login" do
-    scenario "using google oauth2" do
+  describe "actions:" do
+    scenario "login using google oauth2" do
       visit '/'
       expect(page).to have_link("GOOGLE")
       expect(page).to have_css('#camera-view')

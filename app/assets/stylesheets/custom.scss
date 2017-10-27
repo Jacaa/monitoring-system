@@ -21,7 +21,7 @@ body {
 
 #camera-view {
   height: 320px;
-  width: 480px;
+  max-width: 480px;
   background-color: $fake-camera-color;
   margin: auto;
   margin-top: 50px;
@@ -42,6 +42,15 @@ nav {
       color: $dark-grey;
       &:hover {
         color: $light-grey;
+      }
+    }
+    li > a {
+      color: $dark-grey;
+      font-size: 1.25em;
+      text-decoration: none;
+      &:hover {
+        color: $light-grey;
+        background-color: $white;
       }
     }
   }
@@ -103,4 +112,47 @@ nav {
 
 .google {
   background-color: $google-color;
+}
+
+/* cookies */
+
+.cookies-eu-container {
+  width: 80%;
+  margin: auto;
+  text-align: justify;
+  &> .text-center {
+    margin-top: 20px;
+  }
+  a {
+    color: $dark-grey;
+    font-size: 1.5em;
+  }
+}
+
+.cookies-eu .cookies-eu-button-holder .cookies-eu-ok {
+  background-color: $dark-grey;
+  color: $white;
+  border-radius: 4px;
+  padding: 3px 12px;
+  &:hover {
+    font-weight: bold;
+    background-color: $light-grey;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+
+  nav.mobile {
+    width: 95%;
+    text-align: center;
+    ul.navbar-nav {
+      margin-bottom: 0;
+    }
+    .navbar-brand {
+      float: none;
+    }
+    .navbar-header {
+      margin-top: 15px;
+    }
+  }
 }
