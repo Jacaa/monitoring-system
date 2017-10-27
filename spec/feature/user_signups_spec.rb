@@ -10,6 +10,7 @@ RSpec.feature "User" do
       mock_omniauth
       click_link("GOOGLE")
       expect(page).to have_link("Logout")
+      expect(page).to have_css('.alert')
       expect(page).to have_css('#camera-view')
       expect(page).to have_css('#data-tables')
       expect(page).to have_content("example@email.com")

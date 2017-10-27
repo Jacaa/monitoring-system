@@ -36,6 +36,7 @@ nav {
     border-radius: 0;
     border-bottom: 1px solid $light-grey;
     background-color: $white;
+    margin-bottom: 0;
     .navbar-brand {
       font-family: $brand-font;
       font-size: 1.7em;
@@ -138,6 +139,13 @@ nav {
     font-weight: bold;
     background-color: $light-grey;
   }
+}
+
+/* flash messages */
+
+.alert {
+  width: 80%;
+  margin: auto;
 }
 
 @media only screen and (max-width: 767px) {

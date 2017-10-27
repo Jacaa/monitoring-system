@@ -13,6 +13,10 @@ class User < ApplicationRecord
   def self.create_user(auth)
     create(provider: auth[:provider], uid: auth[:uid], email: auth[:info][:email])
   end
+
+  def send_welcome_email
+    UserMailer.welcome(self).deliver_now
+  end
   
   private
 

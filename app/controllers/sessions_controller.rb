@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
     else
       user = User.create_user(auth)
       log_in user
-      # user.send_welcome_email
+      user.send_welcome_email
       flash[:info] = "Welcome! Check your email for further steps."
       redirect_to root_url
     end
