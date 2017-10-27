@@ -39,6 +39,7 @@ group :test do
   gem 'factory_bot_rails'
   gem 'guard-rspec'
   gem 'rails-controller-testing'
+  gem 'database_cleaner'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
