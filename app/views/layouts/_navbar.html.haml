@@ -3,8 +3,14 @@
     .navbar-header
       = link_to 'Monitoring system', root_path, class: "navbar-brand"
     %ul.nav.navbar-nav.navbar-right
-      %li
-        .google.oauth-icons
-          .fa.fa-google-plus
-          .overlay
-            .text= link_to "GOOGLE", '/auth/google_oauth2'
+      - if logged_in?
+        %li
+          = link_to current_user.email, edit_user_path(current_user), id: "edit"
+        %li
+          = link_to "Logout", '/logout', method: :delete
+      - else
+        %li
+          .google.oauth-icons
+            .fa.fa-google-plus
+            .overlay
+              .text= link_to "GOOGLE", '/auth/google_oauth2'

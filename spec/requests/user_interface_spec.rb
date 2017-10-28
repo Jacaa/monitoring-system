@@ -27,4 +27,35 @@ RSpec.describe "User", type: :request do
     expect(ActionMailer::Base.deliveries.size).to eq(1)
     expect(response).to redirect_to root_url
   end
+
+  it "updates profile" do
+    # Login user
+    mock_omniauth
+    get '/auth/google_oauth2/callback'
+    # Visit edit page
+    user = assigns(:user)
+    get "/users/#{user.id}/edit"
+    expect(response).to render_template(:edit)
+    # Update profile
+    patch "/users/#{user.id}", params: { user: {send_notification: true, 
+                                                save_photo: true } }
+    user.reload
+    expect(user.send_notification).to eq(true)
+    expect(user.save_photo).to eq(true)
+    expect(response).to redirect_to edit_user_url
+    follow_redirect!
+    expect(response).to render_template(:edit)
+  end
+
+  it "deletes profile" do
+    # Login user
+    mock_omniauth
+    get '/auth/google_oauth2/callback'
+    # Delete profile
+    user = assigns(:user)
+    expect { delete "/users/#{user.id}" }.to change(User, :count).by(-1)
+    expect(response).to redirect_to root_url
+    follow_redirect!
+    expect(response).to render_template(:index)
+  end
 end

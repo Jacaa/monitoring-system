@@ -15,7 +15,7 @@ module SessionsHelper
   end
 
   def correct_user?(user)
-    user == correct_user
+    user == current_user
   end
 
   def logged_in?

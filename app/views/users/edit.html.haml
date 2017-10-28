@@ -1,0 +1,13 @@
+= render 'layouts/navbar'
+= render 'layouts/flash'
+.container
+  .row
+    .logged-user-profile
+      = simple_form_for(@user) do |form|
+        = form.input :send_notification
+        - if current_user.admin?
+          = form.input :save_photo
+        .text-center
+        = form.button :submit, 'Save', class: 'btn grey-btn'
+        = link_to "Delete profile", @user, method: :delete, 
+          data: { confirm: "You sure?"}, class: "btn red-border-btn"

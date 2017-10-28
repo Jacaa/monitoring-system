@@ -15,5 +15,8 @@ RSpec.feature "User" do
       expect(page).to have_css('#data-tables')
       expect(page).to have_content("example@email.com")
     end
+
+    # scenario "update profile"
+    # scenario "delete profile"
   end
 end

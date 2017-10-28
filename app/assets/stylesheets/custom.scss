@@ -8,7 +8,9 @@ $fake-camera-color: #ADAFAD;
 $dark-grey:         #3E3E3E;
 $white:             #F5F5F5;
 $light-grey:        #9E9E9E;
+$very-light-grey:   #FFFFFF;
 $google-color:      #DD4B39;
+$red:               #C20000;
 
 /* fonts */
 
@@ -147,6 +149,56 @@ nav {
   width: 80%;
   margin: auto;
 }
+
+
+/* edit user page */
+
+.logged-user-profile {
+  margin: 50px auto;
+  width: 320px;
+  border: 1px solid $light-grey;
+  border-radius: 4px;
+  background-color: $very-light-grey;
+  padding: 20px 30px;
+}
+
+/* buttons */
+
+.btn {
+  margin: auto;
+  color: $white;
+  border: none;
+  display: block;
+  &:hover, &:focus {
+    color: $white;
+  }
+}
+
+.grey-btn {
+  width: 80%;
+  background-color: $dark-grey;
+  color: $white;
+  border-radius: 4px;
+  padding: 8px 12px;
+  &:hover {
+    background-color: $light-grey;
+  }
+}
+
+.red-border-btn {
+  width: 50%;
+  margin-top: 15%;
+  border: 1px solid $red;
+  color: $red;
+  &:hover {
+    background-color: $red;
+  }
+  &:focus {
+    color: $red;
+  }
+}
+
+
 
 @media only screen and (max-width: 767px) {
 
