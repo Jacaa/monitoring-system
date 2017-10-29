@@ -19,7 +19,7 @@ RSpec.describe SessionsHelper, type: :helper do
     end
 
     it "return nil when remember_token is wrong" do
-      log_in @user
+      remember @user
       @user.update_attribute(:remember_token, User.new_token)
       expect(current_user).to be_nil
     end
