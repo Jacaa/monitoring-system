@@ -198,6 +198,33 @@ nav {
   }
 }
 
+/* data-table */
+
+#events {
+  margin: 50px auto;
+  font-family: $brand-font;
+  border-collapse: collapse;
+  width: 90%;
+  td, th {
+    border: 1px solid $light-grey;
+    padding: 4px;
+    text-align: center;
+  }
+  th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    background-color: $dark-grey;
+    color: $white;
+  }
+  tr {
+    &:nth-child(even) {
+      background-color: $very-light-grey;
+    }
+      &:hover {
+        background-color: $light-grey;
+    }
+  }
+}
 
 
 @media only screen and (max-width: 767px) {

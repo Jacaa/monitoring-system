@@ -1,0 +1,7 @@
+%tr
+  %td= event.id
+  %td= event.is_human ? 'Yes' : 'No'
+  %td= event.walked_in ? 'Yes' : 'No'
+  %td= event.created_at.strftime('%d %b %Y')
+  %td= event.created_at.strftime('%H:%M:%S')
+  %td= event.photo

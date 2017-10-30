@@ -12,6 +12,13 @@ RSpec.describe HomeController, type: :controller do
       get :index
       expect(response).to render_template(:index)
     end
+
+    it "assigns @events variable" do
+      5.times { create(:event) }
+      get :index
+      events = Event.all
+      expect(assigns(:events)).to eq(events)
+    end
   end
 
   describe "GET #cookies" do

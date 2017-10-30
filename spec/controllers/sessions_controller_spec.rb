@@ -25,10 +25,12 @@ RSpec.describe SessionsController, type: :controller do
   end
   
   describe "DELETE #destroy" do
-    it "deletes cookies" do
+    it "deletes cookies and session" do
+      session['user_id'] = 'not_nil'
       cookies['user_id'] = 'not_nil'
       cookies['remember_token'] = 'valid_token'
       delete :destroy
+      expect(session['user_id']).to be_nil
       expect(response.cookies['user_id']).to be_nil
       expect(response.cookies['remember_token']).to be_nil
     end

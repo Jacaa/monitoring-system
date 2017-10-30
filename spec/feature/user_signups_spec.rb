@@ -13,7 +13,7 @@ RSpec.feature "User" do
       expect(page).to have_link("Logout")
       expect(page).to have_css('.alert')
       expect(page).to have_css('#camera-view')
-      expect(page).to have_css('#data-tables')
+      expect(page).to have_css('#events')
       expect(page).to have_content("example@email.com")
     end
   end

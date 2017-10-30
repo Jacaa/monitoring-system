@@ -5,4 +5,12 @@
     #camera-view
   - if logged_in?
     .row
-      #data-tables
+      %table#events
+        %tr
+          %th Number
+          %th Human
+          %th Walked in
+          %th Date
+          %th Hour
+          %th Photo
+          = render @events

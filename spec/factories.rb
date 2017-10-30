@@ -8,4 +8,10 @@ FactoryBot.define do
     send_notification false
     save_photo false
   end
+
+  factory :event do
+    is_human true
+    walked_in true
+    photo 'photo'
+  end
 end
