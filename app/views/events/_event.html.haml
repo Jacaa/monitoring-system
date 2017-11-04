@@ -1,5 +1,5 @@
 %tr
-  %td= event.id
+  %td= @events.index(event) + 1
   %td= event.is_human ? 'Yes' : 'No'
   %td= event.walked_in ? 'Yes' : 'No'
   %td= event.created_at.strftime('%d %b %Y')
