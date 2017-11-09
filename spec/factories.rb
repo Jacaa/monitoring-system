@@ -10,7 +10,6 @@ FactoryBot.define do
   end
 
   factory :event do
-    is_human true
     walked_in true
     photo 'photo'
   end
