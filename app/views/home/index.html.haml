@@ -6,11 +6,12 @@
       %img{src: 'http://192.168.1.137:9090/stream/video.mjpeg', alt: 'Something goes wrong, sorry ;('}
   - if logged_in?
     .row
-      %table#events
-        %tr
-          %th Number
-          %th Walked in
-          %th Date
-          %th Hour
-          %th Photo
+      %table#events.row-border{cellspacing: 0}
+        %thead  
+          %tr
+            %th No.
+            %th Direction
+            %th Date
+            %th Photo
+        %tbody
           = render @events

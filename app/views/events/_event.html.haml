@@ -1,6 +1,10 @@
 %tr
   %td= @events.index(event) + 1
-  %td= event.walked_in ? 'Yes' : 'No'
-  %td= event.created_at.strftime('%d %b %Y')
-  %td= event.created_at.strftime('%H:%M:%S')
+  - if event.walked_in
+    %td
+      .fa.fa-share{title: 'Walked in'}
+  - else
+    %td
+      .fa.fa-reply{title: 'Walked out'}
+  %td= event.created_at.strftime('%d/%m/%Y %H:%M:%S')
   %td= event.photo
