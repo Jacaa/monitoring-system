@@ -206,6 +206,10 @@ nav {
   }
 }
 
+#reset-date-range-btn {
+  margin-bottom: 20px;
+}
+
 /* data-table */
 
 #events {
@@ -249,8 +253,41 @@ input {
   }
 }
 
+/* filters */
+
+#filters {
+  margin: 0 auto 10px auto;
+  float: left;
+  margin-top: 15px;
+  width: 130px;
+}
+
+#events_filter {
+  display: none;
+}
+
+#events_wrapper {
+  float: right;
+  clear: none;
+  width: 75%;
+}
+
+.dataTables_filter {
+  text-align: center !important;
+  float: none !important;
+  }
+
 @media only screen and (max-width: 767px) {
-  
+
+  #filters, #events_wrapper {
+    float: none;
+    width: 100%;
+    display: inline-block;
+  }
+
+  #events_wrapper {
+    width: 100%;
+  }
   li:nth-child(2) {
     border: 1px solid $light-grey;
     border-bottom: none;

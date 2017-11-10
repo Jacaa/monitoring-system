@@ -20,6 +20,7 @@ gem 'simple_form'
 gem 'figaro'
 gem 'omniauth-google-oauth2'
 gem 'cookies_eu'
+gem 'jquery-ui-rails'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

@@ -3,8 +3,10 @@
   - if event.walked_in
     %td
       .fa.fa-share{title: 'Walked in'}
+        in
   - else
     %td
       .fa.fa-reply{title: 'Walked out'}
-  %td= event.created_at.strftime('%d/%m/%Y %H:%M:%S')
+        out
+  %td= event.created_at.strftime('%d %b %Y %H:%M:%S')
   %td= event.photo

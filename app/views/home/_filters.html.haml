@@ -1,0 +1,20 @@
+%form#filters
+  .form-group
+    %label From:
+    %input#start-date.form-control{type: "text"}
+  .form-group
+    %label To:
+    %input#end-date.form-control{type: "text"}
+  .btn.grey-btn#reset-date-range-btn Reset range
+  .form-group
+    %label Direction:
+    %select#direction.form-control
+      %option{value: 'all'} All
+      %option{value: 'in'} Walked in
+      %option{value: 'out'} Walked out
+  .form-group
+    %label Photo:
+    %select#photo.form-control
+      %option{value: 'all'} All
+      %option{value: 'link'} Yes
+      %option{value: 'no photo'} No
