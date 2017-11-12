@@ -253,6 +253,13 @@ input {
   }
 }
 
+#data {
+  margin-top: 0px;
+}
+
+#events_info {
+  font-weight: bold;
+}
 /* filters */
 
 #filters {
@@ -275,10 +282,28 @@ input {
 .dataTables_filter {
   text-align: center !important;
   float: none !important;
-  }
+}
+
+.inline {
+  float: left;
+  text-align: center;
+  width: 15%;
+  margin: 0 2.5%;
+  padding: 4px 6px;
+}
+
+#predefined-filters {
+  margin-top: 50px;
+  margin-bottom: 10px;
+}
 
 @media only screen and (max-width: 767px) {
 
+  .inline {
+    float: none;
+    width: 80%;
+    margin: 5px auto;
+  }
   #filters, #events_wrapper {
     float: none;
     width: 100%;

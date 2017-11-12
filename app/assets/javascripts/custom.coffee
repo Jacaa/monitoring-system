@@ -13,8 +13,9 @@ $(document).on 'turbolinks:load', ->
     } ]
   )
 
-  # Date range filter
+  # Date filter
 
+  # FILTER - select range
   # Get the earliest date from table events
   earliestDate = table.column(2).data().sort()[0]
   # Create datepicker
@@ -59,6 +60,44 @@ $(document).on 'turbolinks:load', ->
     $('#end-date').datepicker('setDate', todayDate)
     table.draw()
 
+# FILTER - predefined
+
+  today = new Date()
+
+  yesterdayDate = today.setTime(today.getTime() - (24 * 60 * 60 * 1000))
+  yesterdayDate = new Date(yesterdayDate)
+
+  last7Days = today.setTime(today.getTime() - (6 * 24 * 60 * 60 * 1000))
+  last7Days = new Date(last7Days)
+
+  last30Days = today.setTime(today.getTime() - (23 * 24 * 60 * 60 * 1000))
+  last30Days = new Date(last30Days)
+
+  $('#today-filter').click ->
+    $('#start-date').datepicker('setDate', todayDate)
+    $('#end-date').datepicker('setDate', todayDate)
+    table.draw()
+
+  $('#yesterday-filter').click ->
+    $('#start-date').datepicker('setDate', yesterdayDate)
+    $('#end-date').datepicker('setDate', yesterdayDate)
+    table.draw()
+
+  $('#last-7-days-filter').click ->
+    $('#start-date').datepicker('setDate', last7Days)
+    $('#end-date').datepicker('setDate', todayDate)
+    table.draw()
+
+  $('#last-30-days-filter').click ->
+    $('#start-date').datepicker('setDate', last30Days)
+    $('#end-date').datepicker('setDate', todayDate)
+    table.draw()
+
+  $('#all-filter').click ->
+    $('#start-date').datepicker('setDate', earliestDate)
+    $('#end-date').datepicker('setDate', todayDate)
+    table.draw()
+    
   # Detect changes in direction and photo filters
   $('select').on('change', ->
     table.draw()
