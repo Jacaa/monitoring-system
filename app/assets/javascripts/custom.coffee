@@ -191,8 +191,22 @@ $(document).on 'turbolinks:load', ->
   )
 
   # Set needed variables
-  earliestDate = table.column(2).data().sort()[0] # Earliest date from data table
-  todayDate = new Date() # Today date
+  earliestDate = table.column(2).data().sort()[0] # Earliest from data table
+
+  latestDate = table.column(2).data().sort().reverse()[0] # Latest from data table
+  
+  todayDate = new Date() # Today
+  
+  today = new Date() # Variable to help calculate other dates
+
+  yesterdayDate = today.setTime(today.getTime() - (24 * 60 * 60 * 1000))
+  yesterdayDate = new Date(yesterdayDate)
+
+  last7Days = today.setTime(today.getTime() - (6 * 24 * 60 * 60 * 1000))
+  last7Days = new Date(last7Days)
+
+  last30Days = today.setTime(today.getTime() - (23 * 24 * 60 * 60 * 1000))
+  last30Days = new Date(last30Days)
 
   # Create datepickers
   $('#start-date').datepicker
@@ -224,22 +238,9 @@ $(document).on 'turbolinks:load', ->
 
   # Set defaults values of datepickers
   $('#start-date').datepicker('setDate', earliestDate)
-  $('#end-date').datepicker('setDate', todayDate)
+  $('#end-date').datepicker('setDate', latestDate)
 
   # Predefined date filters
-
-  # Variable to help calculate other dates
-  today = new Date()
-
-  # Calculates dates
-  yesterdayDate = today.setTime(today.getTime() - (24 * 60 * 60 * 1000))
-  yesterdayDate = new Date(yesterdayDate)
-
-  last7Days = today.setTime(today.getTime() - (6 * 24 * 60 * 60 * 1000))
-  last7Days = new Date(last7Days)
-
-  last30Days = today.setTime(today.getTime() - (23 * 24 * 60 * 60 * 1000))
-  last30Days = new Date(last30Days)
 
   # Filters behaviour
   $('#today-filter').click ->
@@ -264,9 +265,9 @@ $(document).on 'turbolinks:load', ->
 
   $('#all-filter, #reset-date-range-btn').click ->
     $('#start-date').datepicker('setDate', earliestDate)
-    $('#end-date').datepicker('setDate', todayDate)
+    $('#end-date').datepicker('setDate', latestDate)
     updateTableAndChart(table, chart)
-    
+
   # Detect changes in direction and photo filters
   $('select').on('change', ->
     updateTableAndChart(table, chart)
