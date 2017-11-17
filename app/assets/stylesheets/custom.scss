@@ -260,6 +260,7 @@ input {
 #events_info {
   font-weight: bold;
 }
+
 /* filters */
 
 #filters {
@@ -297,8 +298,17 @@ input {
   margin-bottom: 10px;
 }
 
-@media only screen and (max-width: 767px) {
+/* chart */
 
+.chart {
+  width: 75%;
+  margin: auto;
+}
+
+@media only screen and (max-width: 767px) {
+  .chart {
+    width: 90%;
+  }
   .inline {
     float: none;
     width: 80%;
