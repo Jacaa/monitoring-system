@@ -1,7 +1,10 @@
-%nav.navbar.navbar-static.mobile
+%nav.navbar.navbar-static.mobile.navbar-fixed-top
   .container-fluid
     .navbar-header
-      = link_to 'Monitoring system', root_path, class: "navbar-brand"
+      -# = link_to 'Monitoring system', root_path, class: "navbar-brand"
+      = link_to root_path, class: "navbar-brand" do
+        Monitoring
+        %span system
     %ul.nav.navbar-nav.navbar-right
       - if logged_in?
         %li

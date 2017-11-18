@@ -1,7 +1,8 @@
 = render 'layouts/navbar'
 = render 'layouts/flash'
-.container
+.container#edit-page
   .row
+    %h3 Options:
     .logged-user-profile
       = simple_form_for(@user) do |form|
         = form.input :send_notification
