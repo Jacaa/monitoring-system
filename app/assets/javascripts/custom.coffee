@@ -169,6 +169,14 @@ updateTableAndChart = (table, chart)->
   updateChart(chart, dates, walkedIn, walkedOut)
   table.draw()
 
+# Change type of the chart
+changeCharType = (chart, config, newType) ->
+  ctx = $('#chart')
+  chart.destroy()
+  temp = jQuery.extend(true, {}, config)
+  temp.type = newType
+  chart = new Chart(ctx, temp)
+
 # ------------------------------------------------------------------------------
 # ------------------------------------------------------------------------------
 # ------------------------------------------------------------------------------
@@ -333,3 +341,12 @@ $(document).on 'turbolinks:load', ->
   # Open filters menu
   $('#open-menu').click ->
     $('#left-panel').toggle()
+
+  # Change chart type
+  $("#line").click ->
+    chart = changeCharType(chart, config, 'line');
+    console.log chart
+    
+  $("#bar").click ->
+    chart = changeCharType(chart, config, 'bar')
+    console.log chart

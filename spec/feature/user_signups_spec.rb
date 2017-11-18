@@ -7,14 +7,14 @@ RSpec.feature "User" do
     scenario "using google oauth2" do
       visit '/'
       expect(page).to have_link("GOOGLE")
-      expect(page).to have_css('#camera-view')
+      expect(page).to have_content('camera')
       mock_omniauth
       click_link("GOOGLE")
-      expect(page).to have_link("Logout")
+      expect(page).to have_css(".fa-sign-out") # Logout
       expect(page).to have_css('.alert')
-      expect(page).to have_css('#camera-view')
+      expect(page).to have_content('camera')
       expect(page).to have_css('#events')
-      expect(page).to have_content("example@email.com")
+      expect(page).to have_css(".fa-user") # User profle
     end
   end
 

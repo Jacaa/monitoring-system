@@ -29,11 +29,14 @@
         %p.header 
           %i.fa.fa-bar-chart
           Chart
+          %span#line Line
+          %span#bar Bar
         .row-content
           #chart-wrapper
             %canvas#chart
   - else
     #main-page.non-logged
+      = render 'layouts/flash'
       .row
         %p.header Live camera
         .row-content.text-center
