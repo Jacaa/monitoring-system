@@ -329,3 +329,7 @@ $(document).on 'turbolinks:load', ->
         ]
   ctx = $('#chart')
   chart = new Chart(ctx, config)
+
+  # Open filters menu
+  $('#open-menu').click ->
+    $('#left-panel').toggle()

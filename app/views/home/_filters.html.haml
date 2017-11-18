@@ -1,20 +1,57 @@
-%form#filters
-  .form-group
-    %label From:
-    %input#start-date.form-control{type: "text"}
-  .form-group
-    %label To:
-    %input#end-date.form-control{type: "text"}
-  .btn.grey-btn#reset-date-range-btn Reset range
-  .form-group
-    %label Direction:
-    %select#direction.form-control
-      %option{value: 'all'} All
-      %option{value: 'in'} Walked in
-      %option{value: 'out'} Walked out
-  .form-group
-    %label Photo:
-    %select#photo.form-control
-      %option{value: 'all'} All
-      %option{value: 'link'} Yes
-      %option{value: 'no photo'} No
+#filters-wrapper
+  %p.header.header-inverse Predefined date filters:
+
+  #predefined-filters
+    
+    #today-filter.menu-btn.menu-margin-padding
+      %i.fa.fa-dot-circle-o
+      Today
+    #yesterday-filter.menu-btn.menu-margin-padding
+      %i.fa.fa-dot-circle-o
+      Yesterday
+    #last-7-days-filter.menu-btn.menu-margin-padding
+      %i.fa.fa-dot-circle-o
+      Last 7 days
+    #last-30-days-filter.menu-btn.menu-margin-padding
+      %i.fa.fa-dot-circle-o
+      Last 30 days
+    #all-filter.menu-btn.menu-margin-padding
+      %i.fa.fa-dot-circle-o
+      All
+
+  %form#filters
+
+    %p.header.header-inverse Date filter:
+    
+    .form-group.no-margin
+      %p.menu-margin-padding
+        %i.fa.fa-dot-circle-o
+        From
+      %input.menu-margin-padding.w168#start-date.form-control{type: "text"}
+    
+    .form-group.no-margin
+      %p.menu-margin-padding
+        %i.fa.fa-dot-circle-o
+        To
+      %input.menu-margin-padding.w168#end-date.form-control{type: "text"}
+      .btn.white-border-btn#reset-date-range-btn Reset range
+    
+    %p.header.header-inverse Other filters:
+    
+    .form-group.no-margin
+      %p.menu-margin-padding
+        %i.fa.fa-dot-circle-o
+        Direction filter:
+      %select.menu-margin-padding.w168#direction.form-control
+        %option{value: 'all'} All
+        %option{value: 'in'} Walked in
+        %option{value: 'out'} Walked out
+    
+    .form-group.no-margin
+      %p.menu-margin-padding
+        %i.fa.fa-dot-circle-o
+        Photo filter:
+      %select.menu-margin-padding.w168#photo.form-control
+        %option{value: 'all'} All
+        %option{value: 'link'} Yes
+        %option{value: 'no photo'} No

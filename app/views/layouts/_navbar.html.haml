@@ -1,17 +1,25 @@
 %nav.navbar.navbar-static.mobile.navbar-fixed-top
   .container-fluid
     .navbar-header
-      -# = link_to 'Monitoring system', root_path, class: "navbar-brand"
+      - if logged_in?
+        %button.navbar-toggle#open-menu{type: 'button', data: { toggle: "collapse", target: "#navbar"}}
+          %span.icon-bar
+          %span.icon-bar
+          %span.icon-bar
       = link_to root_path, class: "navbar-brand" do
         Monitoring
         %span system
-    %ul.nav.navbar-nav.navbar-right
-      - if logged_in?
-        %li
-          = link_to current_user.email, edit_user_path(current_user), id: "edit"
-        %li
-          = link_to "Logout", '/logout', method: :delete
-      - else
+    - if logged_in?
+      .collapse.navbar-collapse#navbar
+        %ul.nav.navbar-nav.navbar-right
+          %li
+            = link_to edit_user_path(current_user), id: "edit" do
+              .fa.fa-user{title: 'User profile'}
+          %li
+            = link_to '/logout', method: :delete do
+              .fa.fa-sign-out{title: 'Logout'}
+    - else
+      %ul.nav.navbar-nav.navbar-right
         %li
           .google.oauth-icons
             .fa.fa-google-plus
