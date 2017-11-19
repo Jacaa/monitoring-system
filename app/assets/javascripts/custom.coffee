@@ -164,16 +164,22 @@ getFiltersValues = (direction, photo) ->
   return [direction, photo]
 
 # Just makes three functions into one
-updateTableAndChart = (table, chart)->
+updateTableAndChart = (table, chart, updateTable)->
   [dates, walkedIn, walkedOut] = prepareData(table)
   updateChart(chart, dates, walkedIn, walkedOut)
-  table.draw()
+  if updateTable then table.draw()
 
 # Change type of the chart
-changeCharType = (chart, config, newType) ->
+changeCharType = (chart, config, newType, showLine) ->
   ctx = $('#chart')
   chart.destroy()
   temp = jQuery.extend(true, {}, config)
+  if newType == 'line'
+    temp.options.scales.xAxes[0].gridLines.offsetGridLines = false
+  else
+    temp.options.scales.xAxes[0].gridLines.offsetGridLines = true
+  temp.data.datasets[0].showLine = showLine
+  temp.data.datasets[1].showLine = showLine
   temp.type = newType
   chart = new Chart(ctx, temp)
 
@@ -228,7 +234,7 @@ $(document).on 'turbolinks:load', ->
         alert "Incorrect range - start date can't be later than end day"
         $('#start-date').datepicker('setDate', earliestDate)
       else
-        updateTableAndChart(table, chart)
+        updateTableAndChart(table, chart, true)
 
   # Create datepicker
   $('#end-date').datepicker
@@ -242,7 +248,7 @@ $(document).on 'turbolinks:load', ->
         alert "Incorrect range - end date can't be earlier than start day"
         $('#end-date').datepicker('setDate', todayDate)
       else
-        updateTableAndChart(table, chart)
+        updateTableAndChart(table, chart, true)
 
   # Set defaults values of datepickers
   $('#start-date').datepicker('setDate', earliestDate)
@@ -254,31 +260,31 @@ $(document).on 'turbolinks:load', ->
   $('#today-filter').click ->
     $('#start-date').datepicker('setDate', todayDate)
     $('#end-date').datepicker('setDate', todayDate)
-    updateTableAndChart(table, chart)
+    updateTableAndChart(table, chart, true)
 
   $('#yesterday-filter').click ->
     $('#start-date').datepicker('setDate', yesterdayDate)
     $('#end-date').datepicker('setDate', yesterdayDate)
-    updateTableAndChart(table, chart)
+    updateTableAndChart(table, chart, true)
 
   $('#last-7-days-filter').click ->
     $('#start-date').datepicker('setDate', last7Days)
     $('#end-date').datepicker('setDate', todayDate)
-    updateTableAndChart(table, chart)
+    updateTableAndChart(table, chart, true)
 
   $('#last-30-days-filter').click ->
     $('#start-date').datepicker('setDate', last30Days)
     $('#end-date').datepicker('setDate', todayDate)
-    updateTableAndChart(table, chart)
+    updateTableAndChart(table, chart, true)
 
   $('#all-filter, #reset-date-range-btn').click ->
     $('#start-date').datepicker('setDate', earliestDate)
     $('#end-date').datepicker('setDate', latestDate)
-    updateTableAndChart(table, chart)
+    updateTableAndChart(table, chart, true)
 
   # Detect changes in direction and photo filters
   $('select').on('change', ->
-    updateTableAndChart(table, chart)
+    updateTableAndChart(table, chart, true)
   )
 
   # Create new table depends on filters
@@ -316,6 +322,8 @@ $(document).on 'turbolinks:load', ->
         {
           label: 'Walked in'
           borderColor: '#359e2c'
+          borderWidth: 2
+          showLine: true
           backgroundColor: '#359e2c'
           fill: false
           data: walkedIn
@@ -323,16 +331,26 @@ $(document).on 'turbolinks:load', ->
         {
           label: 'Walked out'
           borderColor: '#9e2c2c'
+          borderWidth: 2
+          showLine: true
           backgroundColor: '#9e2c2c'
           fill: false
           data: walkedOut
         }
       ]
     options:
+      responsive: true
       scales:
         xAxes: [
           {
-            barPercentage: 0.5
+            barPercentage: 0.3
+            categoryPercentage: 0.60
+            ticks: {
+              maxRotation: 90
+            }
+            gridLines: {
+                offsetGridLines: true
+            }
           }
         ]
   ctx = $('#chart')
@@ -344,9 +362,13 @@ $(document).on 'turbolinks:load', ->
 
   # Change chart type
   $("#line").click ->
-    chart = changeCharType(chart, config, 'line');
-    console.log chart
+    chart = changeCharType(chart, config, 'line', true);
+    updateTableAndChart(table, chart, false)
     
   $("#bar").click ->
-    chart = changeCharType(chart, config, 'bar')
-    console.log chart
+    chart = changeCharType(chart, config, 'bar', true)
+    updateTableAndChart(table, chart, false)
+
+  $("#points").click ->
+    chart = changeCharType(chart, config, 'line', false);
+    updateTableAndChart(table, chart, false)

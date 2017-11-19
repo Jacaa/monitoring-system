@@ -388,7 +388,13 @@ button.navbar-toggle {
   margin: auto;
 }
 
-#line, #bar {
+#chart {
+  max-height: 573px;
+  max-width: 1000px;
+  margin: auto;
+}
+
+#line, #bar, #points {
   padding: 0 10px;
   margin: 0 10px;
   float: right;
@@ -437,5 +443,11 @@ button.navbar-toggle {
   }
   .container-fluid > .navbar-collapse {
     margin: 0;
+  }
+
+  /* chart */
+
+  #chart-wrapper {
+    width: 95%;
   }
 }
