@@ -35,6 +35,7 @@ body {
   min-height: 100%;
   padding: 0;
   margin: 0;
+  font-size: 12px;
 }
 
 .row {
@@ -138,6 +139,7 @@ body {
   border-color: $dark-grey-lighter;
   cursor: pointer;
   width: 168px;
+  font-size: 12px;
 }
 
 /* navbar */
@@ -146,6 +148,7 @@ nav {
   height: 50px;
   margin: auto;
   width: 100%;
+  font-size: 1.2em;
   &.navbar {
     border-radius: 0;
     border: none;
@@ -268,6 +271,7 @@ nav {
 .btn {
   margin: auto;
   color: $almost-white;
+  font-size: 12px;
   border: none;
   display: block;
   &:hover, &:focus {
@@ -402,6 +406,22 @@ button.navbar-toggle {
   border-left: 1px solid $white-row-border-color;
 }
 
+.active {
+  color: $menu-font-color;
+}
+
+/* photo modal */
+
+.modal-dialog {
+  width: 672px;
+  .grey-btn {
+    width: 30%;
+  }
+  img {
+    width: 100%;
+  }
+}
+
 /* medias */
 
 @media only screen and (min-width: 768px) {
@@ -413,6 +433,7 @@ button.navbar-toggle {
 @media only screen and (max-width: 767px) {
   
   /* main page */
+
   #left-panel {
     display: none;
   }
@@ -449,5 +470,11 @@ button.navbar-toggle {
 
   #chart-wrapper {
     width: 95%;
+  }
+
+  /* photo modal */
+
+  .modal-dialog {
+    width: auto;
   }
 }

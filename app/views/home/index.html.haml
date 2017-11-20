@@ -29,9 +29,9 @@
         %p.header 
           %i.fa.fa-bar-chart
           Chart
-          %span#points Points
-          %span#line Line
-          %span#bar Bar
+          %span#points.chart-type Points
+          %span#line.chart-type Line
+          %span#bar.chart-type.active Bar
         .row-content
           #chart-wrapper
             %canvas#chart
@@ -42,3 +42,12 @@
         %p.header Live camera
         .row-content.text-center
           %img{src: 'http://192.168.1.137:9090/stream/video.mjpeg', alt: 'Something goes wrong, sorry ;('}
+  
+#photoModal.modal.fade{role: "dialog"}
+  .modal-dialog
+    .modal-content
+      .modal-body.text-center
+        %img
+      .modal-footer
+        %button.btn.grey-btn{type: "button", "data-dismiss": "modal"} Close
+        

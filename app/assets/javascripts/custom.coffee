@@ -372,3 +372,13 @@ $(document).on 'turbolinks:load', ->
   $("#points").click ->
     chart = changeCharType(chart, config, 'line', false);
     updateTableAndChart(table, chart, false)
+
+  # Behaviour of buttons for changing chart type
+  $(".chart-type").click ->
+    $(".chart-type").removeClass("active")
+    $(this).addClass("active")
+
+  # Get photo src and insert it in modal's body img
+  $(".show-modal").click ->
+    path = $(this).attr("src")
+    $('.modal-body').html( $('<img>').attr("src", path) )

@@ -9,4 +9,9 @@
       .fa.fa-reply{title: 'Walked out'}
         out
   %td= event.created_at.strftime('%d %b %Y %H:%M:%S')
-  %td= event.photo
+  %td
+    - if event.photo == 'no photo'
+      no photo
+    - else
+      = link_to 'link', '#photoModal', class: "show-modal", data: {toggle: "modal"},
+      src: "/events_photos/photo_#{event.created_at.strftime('%d%m%Y%H%M%S')}.jpeg"

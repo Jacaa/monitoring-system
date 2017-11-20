@@ -22,3 +22,6 @@ package.json
 
 # Ignore application configuration
 /config/application.yml
+
+# Ignore events photos
+/public/events_photos/*
