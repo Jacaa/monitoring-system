@@ -3,7 +3,9 @@
 # ------------------------------------------------------------------------------
 # FUNCTIONS
 
-# Convert dates to format like '09 Nov 2017 15:04:21'
+### 
+  Convert given date in Date format to format like '09 Nov 2017 15:04:21'
+### 
 convertDate = (date) ->
   month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
            'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
@@ -20,7 +22,13 @@ convertDate = (date) ->
   date = dd+' '+month[bb]+' '+yyyy+' '+hh+':'+mm+':'+ss
   return date
 
-# Return event data when pass filters, if not replace event with word 'filtered'
+###
+  Return event data when pass filters, if not replace event with word 'filtered'
+  Arguments:
+    event - Array [date, direction, photo]
+    startDate, endDate - Date (from datepickers)
+    directionFIlter, photoFilter - String
+###
 filter = (event, startDate, endDate, directionFilter, photoFilter) ->
   date = new Date(event[0])
   direction = event[1]
@@ -35,9 +43,17 @@ filter = (event, startDate, endDate, directionFilter, photoFilter) ->
     return 'filtered'
   return 'filtered'
 
-# Prepare data for chart
+### 
+  Prepare data for chart
+  Argument:
+    table - DataTable
+  Return: 
+    xAxis - Array (axis x of the chart - dates/hours)
+    walkedIn - Array (number of people walked in each day/hour)
+    walkedOut - Array (number of people walked out each day/hour)
+###
 prepareData = (table) ->
-  # Get data from table
+  # Get data from table -> each column is an array with string elements
   directions = table.column(1).data()
   dates = table.column(2).data()
   photo = table.column(3).data()
@@ -47,7 +63,7 @@ prepareData = (table) ->
   [directionFilter, photoFilter] = getFiltersValues('#direction', '#photo')
 
   # Combine dates with directions and photo
-  # Events array looks like [[date, direction, photo], ...]
+  # Events array looks like [[date, direction, photo], [...]]
   events = dates.map((e, i) ->
     [e, directions[i], photo[i]]
   )
@@ -76,7 +92,7 @@ prepareData = (table) ->
     # like:
     # Thu Nov 09 2017 15:20:19 GMT+0100 (CET) -> '09 Nov 2017', '15:20:19'
     events = events.map((e) ->
-      # Events array format -> [[date, direction, photo], ...]
+      # e looks like [date, direction, photo]
       # Take event's date and convert it to string
       date = convertDate(e[0])
       # Delete date in Date format
@@ -86,15 +102,14 @@ prepareData = (table) ->
       e.splice(0, 0, (date.slice(0, 11)))
       # Return event
       e
+      # Finally events looks like
+      # [['09 Nov 2017', '15:20:19', 'in', 'no-photo'], [...]]
     )
-
-    # Finally events looks like
-    # [['09 Nov 2017', '15:20:19', 'in', 'no-photo'], [...]]
     # console.log events
 
-    # Axis X of the chart - create labels
+    # Axis X of the chart (labels)
     # Check if only one day was chosen
-    # startDate is in format like: Thu Nov 09 2017 15:20:19 GMT+0100 (CET)
+    # startDate/endDate is in format like: Thu Nov 09 2017 15:20:19 GMT+0100 (CET)
     # convert it to string '09 Nov 2017 15:20:19'
     # and take 11 elements -> 09 Nov 2017
     if convertDate(startDate).slice(0,11) == convertDate(endDate).slice(0,11)
@@ -129,26 +144,35 @@ prepareData = (table) ->
 
   walkedIn = []
   walkedOut = []
-  unless results == ['No data']
+  unless results[0] == 'No data'
     for data in results
       walkedIn.push(data[1])
       walkedOut.push(data[2])
 
   return [xAxis, walkedIn, walkedOut]
 
-# Update the chart with new data
+###
+  Update the chart with new data
+  Arguments: 
+    chart - Chart.js type
+    labels, dataset1, dataset2 - Array
+###
 updateChart = (chart, labels, dataset1, dataset2) ->
-  # Remove datasets
+  # Remove labels and datasets
   chart.data.labels.pop()
   for dataset in chart.data.datasets
     dataset.data.pop()
-  # Add new datasets
+  # Add new labels and datasets
   chart.data.labels = labels
   chart.data.datasets[0].data = dataset1
   chart.data.datasets[1].data = dataset2
   chart.update(0)
 
-# Get values from datepickers
+###
+  Get values from datepickers
+  Arguments:
+    startID, endID - id of datepicker elements
+###
 getDateRange = (startID, endID) ->
   startDate = $(startID).datepicker('getDate')
   endDate = $(endID).datepicker('getDate')
@@ -157,19 +181,53 @@ getDateRange = (startID, endID) ->
     endDate.setSeconds(endDate.getSeconds()-1)
   return [startDate, endDate]
 
-# Get values from filters
+### 
+  Get values from filters
+  Arguments:
+    direction, photo - id of direction/photo filter element
+###
 getFiltersValues = (direction, photo) ->
   direction = $(direction).val()
   photo = $(photo).val()
   return [direction, photo]
 
-# Just makes three functions into one
+### 
+  Just makes four functions into one
+  Arguments:
+    table - DataTable
+    chart - Chart.js
+    updateTable - boolean (determine if redraw data table or update only the chart)
+###
 updateTableAndChart = (table, chart, updateTable)->
   [dates, walkedIn, walkedOut] = prepareData(table)
   updateChart(chart, dates, walkedIn, walkedOut)
+  updateStats(walkedIn, walkedOut)
   if updateTable then table.draw()
 
-# Change type of the chart
+# Simple adding two numbers
+add = (a,b) ->
+  return a + b
+
+### 
+  Calculates sum of walked in and walked out
+  Arguments: 
+    walkedIn, walkedOut - Array
+###
+updateStats = (walkedIn, walkedOut) ->
+  _in = walkedIn.reduce(add, 0)
+  _out = walkedOut.reduce(add, 0)
+  # Insert numbers in proper places
+  $("#walked-in .row-content span").text(_in)
+  $("#walked-out .row-content span").text(_out)
+
+### 
+  Change type of the chart
+  Arguments:
+    chart - Chart.js
+    config - object (hash)
+    newType - String
+    showLine - boolean
+###
 changeCharType = (chart, config, newType, showLine) ->
   ctx = $('#chart')
   chart.destroy()
@@ -355,6 +413,9 @@ $(document).on 'turbolinks:load', ->
         ]
   ctx = $('#chart')
   chart = new Chart(ctx, config)
+
+  # Updates statistics section
+  updateStats(walkedIn, walkedOut)
 
   # Open filters menu
   $('#open-menu').click ->

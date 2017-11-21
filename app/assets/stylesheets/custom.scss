@@ -16,7 +16,9 @@ $white-row-border-color:  #d6d6d6;
 
 $google-color:            #DD4B39;
 $red:                     #C20000;
+$red-opacity:             rgba(194, 0, 0, 0.5);
 $green:                   #229200;
+$green-opacity:           rgba(34, 146, 0, 0.5);
 $light-blue:              #1F64BE;
 $medium-blue:             #1956A7;
 
@@ -377,6 +379,10 @@ button.navbar-toggle {
   }
 }
 
+#data-table {
+  clear: both;
+}
+
 /* datepicker */
 
 .ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight {
@@ -422,6 +428,34 @@ button.navbar-toggle {
   }
 }
 
+/* statistics */
+
+#walked-in, #walked-out {
+  width: 50%;
+  float: left;
+  .header span {
+    margin-left: 10px;
+    color: $light-grey;
+    font-weight: normal;
+    font-style: italic;
+    font-size: 0.85em;
+    &:nth-child(3) {
+      margin-left: 0;
+    }
+  }
+  span {
+    font-weight: bold;
+  }
+}
+
+#walked-out {
+  background-color: $red-opacity;
+}
+
+#walked-in {
+  background-color: $green-opacity;
+}
+
 /* medias */
 
 @media only screen and (min-width: 768px) {
@@ -441,7 +475,6 @@ button.navbar-toggle {
     margin-left: 0;
   }
   .row {
-    width: 95%;
     margin: 10px auto;
   }
   #main-page.non-logged {

@@ -6,13 +6,29 @@
     #main-page
       = render 'layouts/flash'
       .row
-        %p.header
+        .header
           %i.fa.fa-camera
           Live camera
         .row-content.text-center
-          %img{src: 'http://192.168.1.137:9090/stream/video.mjpeg', alt: 'Something goes wrong, sorry ;('}
-      .row
-        %p.header 
+          %img{src: 'http://192.168.1.101:9090/stream/video.mjpeg', alt: 'Something goes wrong, sorry ;('}
+      .row#walked-in
+        .header
+          %i.fa.fa-share
+          Walked in
+          %span
+          %span
+        .row-content.text-center
+          %span
+      .row#walked-out
+        .header
+          %i.fa.fa-reply
+          Walked out
+          %span
+          %span
+        .row-content.text-center
+          %span
+      .row#data-table
+        .header 
           %i.fa.fa-table
           Data table
         .row-content
@@ -26,7 +42,7 @@
             %tbody
               = render @events
       .row
-        %p.header 
+        .header 
           %i.fa.fa-bar-chart
           Chart
           %span#points.chart-type Points
@@ -41,7 +57,7 @@
       .row
         %p.header Live camera
         .row-content.text-center
-          %img{src: 'http://192.168.1.137:9090/stream/video.mjpeg', alt: 'Something goes wrong, sorry ;('}
+          %img{src: 'http://192.168.1.101:9090/stream/video.mjpeg', alt: 'Something goes wrong, sorry ;('}
   
 #photoModal.modal.fade{role: "dialog"}
   .modal-dialog
