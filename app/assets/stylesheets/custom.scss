@@ -456,7 +456,22 @@ button.navbar-toggle {
   background-color: $green-opacity;
 }
 
+/* camera */
+
+#camera {
+  width: 480px;
+  height: 360px;
+}
+
+
 /* medias */
+
+@media only screen and (max-width: 480px) {
+  #camera {
+    width: 100%;
+    height: 75%;
+  }
+}
 
 @media only screen and (min-width: 768px) {
   #left-panel {
@@ -509,5 +524,12 @@ button.navbar-toggle {
 
   .modal-dialog {
     width: auto;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  #camera {
+    width: 80%;
+    height: 60%;
   }
 }
