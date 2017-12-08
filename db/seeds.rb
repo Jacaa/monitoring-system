@@ -75,5 +75,5 @@ end
 Event.create!(
   walked_in: true,
   photo: "photo_27112017201657.jpeg",
-  created_at: DateTime.strptime("27/11/2017 20:16:57", "%m/%d/%Y %H:%M:%S")
+  created_at: DateTime.new(2017, 11, 27, 20, 16, 57)
 )
