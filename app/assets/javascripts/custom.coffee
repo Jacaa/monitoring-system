@@ -5,6 +5,7 @@
 
 ### 
   Convert given date in Date format to format like '09 Nov 2017 15:04:21'
+  and '2017/11/27 15:04:21'
 ### 
 convertDate = (date) ->
   month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
@@ -20,7 +21,8 @@ convertDate = (date) ->
   ss = new Date(date).getSeconds()
   if ss < 10 then ss = '0' + ss else JSON.stringify(ss)
   date = dd+' '+month[bb]+' '+yyyy+' '+hh+':'+mm+':'+ss
-  return date
+  date_2 = yyyy+'/'+(bb+1)+'/'+dd+' '+hh+':'+mm+':'+ss # '2017/11/27 15:04:21'
+  return [date, date_2]
 
 ###
   Return event data when pass filters, if not replace event with word 'filtered'
@@ -94,7 +96,7 @@ prepareData = (table) ->
     events = events.map((e) ->
       # e looks like [date, direction, photo]
       # Take event's date and convert it to string
-      date = convertDate(e[0])
+      date = convertDate(e[0])[0]
       # Delete date in Date format
       e.splice(0, 1)
       # Add at index 0 Hour and then Date
@@ -112,7 +114,7 @@ prepareData = (table) ->
     # startDate/endDate is in format like: Thu Nov 09 2017 15:20:19 GMT+0100 (CET)
     # convert it to string '09 Nov 2017 15:20:19'
     # and take 11 elements -> 09 Nov 2017
-    if convertDate(startDate).slice(0,11) == convertDate(endDate).slice(0,11)
+    if convertDate(startDate)[0].slice(0,11) == convertDate(endDate)[0].slice(0,11)
       xAxis = [ '00:00:00', '01:00:00', '02:00:00', '03:00:00', '04:00:00',
                 '05:00:00', '06:00:00', '07:00:00', '08:00:00', '09:00:00',
                 '10:00:00', '11:00:00', '12:00:00', '13:00:00', '14:00:00',
@@ -127,7 +129,7 @@ prepareData = (table) ->
       # Calculates all dates from chosen date range
       for i in [0...numberOfDays]
         date = new Date(startDate.getTime() + (i * 24 * 60 * 60 * 1000))
-        xAxis.push(convertDate(date).slice(0,11))
+        xAxis.push(convertDate(date)[0].slice(0,11))
       setHours = false
 
     # Create results array in format [[date or hour, walkedIn, walkedOut], ...]
@@ -263,10 +265,18 @@ $(document).on 'turbolinks:load', ->
   )
 
   # Set needed variables
-  earliestDate = table.column(2).data().sort()[0] # Earliest from data table
 
-  latestDate = table.column(2).data().sort().reverse()[0] # Latest from data table
-  
+  dates = table.column(2).data()
+
+  # Convert to allow sorting
+  dates = dates.map((e) ->
+    convertDate(e)[1]
+  )
+  # Get earliest and latest dates and convert to proper format
+  earliestDate = convertDate(dates.sort()[0])[0] # Earliest from data table
+
+  latestDate = convertDate(dates.sort().reverse()[0])[0] # Latest from data table
+
   todayDate = new Date() # Today
   
   today = new Date() # Variable to help calculate other dates
