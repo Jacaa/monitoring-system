@@ -74,6 +74,6 @@ end
 
 Event.create!(
   walked_in: true,
-  photo: "photo_27112017201657.jpeg",
-  created_at: DateTime.new(2017, 11, 27, 20, 16, 57)
+  photo: "photo_10122017201657.jpeg",
+  created_at: DateTime.new(2017, 12, 10, 20, 16, 57)
 )
